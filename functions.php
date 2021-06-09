@@ -86,6 +86,13 @@ if ( ! function_exists( '_s_setup' ) ) :
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
+		// Add theme support for custom background
+		add_theme_support( "custom-background");
+
+		// Add theme support for custom header
+		add_theme_support( 'custom-header' );
+		_s_custom_header_setup();
+
 		/**
 		 * Add support for core custom logo.
 		 *
@@ -103,6 +110,14 @@ if ( ! function_exists( '_s_setup' ) ) :
 	}
 endif;
 add_action( 'after_setup_theme', '_s_setup' );
+
+/**
+ * Registers an editor stylesheet for the theme.
+ */
+function _s_add_editor_styles() {
+	add_editor_style( get_template_directory_uri() . '/assets/css/editor-style.css' );
+}
+add_action( 'admin_init', '_s_add_editor_styles' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
