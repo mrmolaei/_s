@@ -12,6 +12,9 @@ if ( ! defined( '_S_VERSION' ) ) {
 	define( '_S_VERSION', '1.0.0' );
 }
 
+add_theme_support( 'custom-header' );
+add_theme_support( "custom-background");
+
 if ( ! function_exists( '_s_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -85,6 +88,9 @@ if ( ! function_exists( '_s_setup' ) ) :
 
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
+
+		// Add theme support for custom header
+		_s_custom_header_setup();
 
 		/**
 		 * Add support for core custom logo.
