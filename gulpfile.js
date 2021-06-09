@@ -11,6 +11,7 @@ const sass = require( 'gulp-sass' );
 sass.compiler = require( 'node-sass' );
 
 const sassSrc = './assets/src/sass/';
+const editorSrc = './assets/src/editor/';
 const jsSrc = './assets/src/js/';
 const cssDest = './assets/css/';
 const jsDest = './assets/js/';
@@ -23,6 +24,15 @@ const sassTask = ( cb ) => {
 		.pipe( browserSync.stream() );
 	cb();
 };
+
+const editorStylesTask = ( cb ) => {
+	return gulp.src( editorSrc + 'editor-style.scss' )
+		.pipe( sass().on( 'error', sass.logError ) )
+		.pipe( autoprefixer( { cascade: false } ) )
+		.pipe( gulp.dest( cssDest ) )
+		.pipe( browserSync.stream() );
+	cb();
+}
 
 const rtlCssTask = ( cb ) => {
 	return gulp.src( cssDest + 'style.css' )
@@ -50,3 +60,4 @@ function liveServerTask( cb ) {
 
 exports.default = series( sassTask, liveServerTask );
 exports.rtlcss = series( rtlCssTask, rtlCssConcatTask );
+exports.editor = editorStylesTask;
