@@ -4,14 +4,14 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package _s
+ * @package Knowledge
  */
 
-if ( ! function_exists( '_s_posted_on' ) ) :
+if ( ! function_exists( 'knowledge_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
-	function _s_posted_on() {
+	function knowledge_posted_on() {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
@@ -26,8 +26,8 @@ if ( ! function_exists( '_s_posted_on' ) ) :
 		);
 
 		$posted_on = sprintf(
-		/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', '_s' ),
+			/* translators: %s: post date. */
+			esc_html_x( 'Posted on %s', 'post date', 'knowledge' ),
 			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 
@@ -36,14 +36,14 @@ if ( ! function_exists( '_s_posted_on' ) ) :
 	}
 endif;
 
-if ( ! function_exists( '_s_posted_by' ) ) :
+if ( ! function_exists( 'knowledge_posted_by' ) ) :
 	/**
 	 * Prints HTML with meta information for the current author.
 	 */
-	function _s_posted_by() {
+	function knowledge_posted_by() {
 		$byline = sprintf(
-		/* translators: %s: post author. */
-			esc_html_x( 'by %s', 'post author', '_s' ),
+			/* translators: %s: post author. */
+			esc_html_x( 'by %s', 'post author', 'knowledge' ),
 			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 		);
 
@@ -52,27 +52,25 @@ if ( ! function_exists( '_s_posted_by' ) ) :
 	}
 endif;
 
-if ( ! function_exists( '_s_entry_footer' ) ) :
+if ( ! function_exists( 'knowledge_entry_footer' ) ) :
 	/**
 	 * Prints HTML with meta information for the categories, tags and comments.
 	 */
-	function _s_entry_footer() {
+	function knowledge_entry_footer() {
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
-			$categories_list = get_the_category_list( esc_html__( ', ', '_s' ) );
+			$categories_list = get_the_category_list( esc_html__( ', ', 'knowledge' ) );
 			if ( $categories_list ) {
 				/* translators: 1: list of categories. */
-				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', '_s' ) . '</span>',
-					$categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'knowledge' ) . '</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			/* translators: used between list items, there is a space after the comma */
-			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', '_s' ) );
+			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'knowledge' ) );
 			if ( $tags_list ) {
 				/* translators: 1: list of tags. */
-				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', '_s' ) . '</span>',
-					$tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'knowledge' ) . '</span>', $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}
 
@@ -81,8 +79,8 @@ if ( ! function_exists( '_s_entry_footer' ) ) :
 			comments_popup_link(
 				sprintf(
 					wp_kses(
-					/* translators: %s: post title */
-						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', '_s' ),
+						/* translators: %s: post title */
+						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'knowledge' ),
 						array(
 							'span' => array(
 								'class' => array(),
@@ -98,8 +96,8 @@ if ( ! function_exists( '_s_entry_footer' ) ) :
 		edit_post_link(
 			sprintf(
 				wp_kses(
-				/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Edit <span class="screen-reader-text">%s</span>', '_s' ),
+					/* translators: %s: Name of current post. Only visible to screen readers */
+					__( 'Edit <span class="screen-reader-text">%s</span>', 'knowledge' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -114,14 +112,14 @@ if ( ! function_exists( '_s_entry_footer' ) ) :
 	}
 endif;
 
-if ( ! function_exists( '_s_post_thumbnail' ) ) :
+if ( ! function_exists( 'knowledge_post_thumbnail' ) ) :
 	/**
 	 * Displays an optional post thumbnail.
 	 *
 	 * Wraps the post thumbnail in an anchor element on index views, or a div
 	 * element when on single views.
 	 */
-	function _s_post_thumbnail() {
+	function knowledge_post_thumbnail() {
 		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
 			return;
 		}
@@ -129,28 +127,28 @@ if ( ! function_exists( '_s_post_thumbnail' ) ) :
 		if ( is_singular() ) :
 			?>
 
-            <div class="post-thumbnail">
+			<div class="post-thumbnail">
 				<?php the_post_thumbnail(); ?>
-            </div><!-- .post-thumbnail -->
+			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>
 
-            <a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 				<?php
-				the_post_thumbnail(
-					'post-thumbnail',
-					array(
-						'alt' => the_title_attribute(
-							array(
-								'echo' => false,
-							)
-						),
-					)
-				);
+					the_post_thumbnail(
+						'post-thumbnail',
+						array(
+							'alt' => the_title_attribute(
+								array(
+									'echo' => false,
+								)
+							),
+						)
+					);
 				?>
-            </a>
+			</a>
 
-		<?php
+			<?php
 		endif; // End is_singular().
 	}
 endif;
@@ -165,18 +163,3 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 		do_action( 'wp_body_open' );
 	}
 endif;
-
-
-if ( ! function_exists( '_s_header_image' ) ) :
-	/**
-	 * Shim for sites older than 5.2.
-	 *
-	 * @link https://core.trac.wordpress.org/ticket/12563
-	 */
-	function _s_header_image() {
-		if (has_header_image()) {
-            echo sprintf('<img src="%s" height="%s" width="%s" alt="%s" />', esc_url(get_header_image()) , esc_attr(get_custom_header()->height), esc_attr(get_custom_header()->width), esc_attr__('Header Image', '_s'));
-		}
-	}
-endif;
-
